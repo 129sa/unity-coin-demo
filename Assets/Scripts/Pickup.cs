@@ -25,15 +25,15 @@ public class Pickup : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<Collider>().enabled = true;
     }
-    IEnumerator Blink()
-    {
-        var renderer = GetComponent<Renderer>();
-        for (int i = 0; i < 3; i++)
-        {
-            renderer.material.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            renderer.material.color = Color.white;
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
+    //IEnumerator Blink()
+    //{
+    //    var renderer = GetComponent<Renderer>();
+    //    for (int i = 0; i < 3; i++)
+    //    {
+    //        renderer.material.color = Color.red;
+    //        yield return new WaitForSeconds(0.1f);
+    //        renderer.material.color = Color.white;
+    //        yield return new WaitForSeconds(0.1f);
+    //    }
+    //}
 }

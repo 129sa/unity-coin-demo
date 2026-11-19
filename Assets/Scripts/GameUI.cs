@@ -16,6 +16,13 @@ public class GameUI : MonoBehaviour
     float timeLeft = 45f;
     bool gameOver = false;
 
+    public AudioSource audioSource;
+    public AudioClip coinClip;
+    public AudioClip hitClip;
+
+    public void playCoin() { audioSource.PlayOneShot(coinClip); }
+    public void playHit() { audioSource.PlayOneShot(hitClip); }
+
     void Awake() { Instance = this; }
 
     void Update()
@@ -26,7 +33,7 @@ public class GameUI : MonoBehaviour
         if (timeLeft <= 0f)
         {
             timeLeft = 0f;
-            EndGame("时间到，失败");
+            EndGame("时间到，失败", new Color(1f, 0.4f, 0.3f));
         }
         timeText.text = "时间：" + Mathf.CeilToInt(timeLeft);
     }
@@ -34,21 +41,21 @@ public class GameUI : MonoBehaviour
     public void AddCoin()
     {
         if (gameOver) return;
-
+        playCoin();
         coins++;
         coinText.text = "金币：" + coins + "/" + totalCoins;
 
-        if (coins >= totalCoins) EndGame("胜利！");
+        if (coins >= totalCoins) EndGame("胜利！",new Color(0.2f,1f,0.4f));
     }
 
-    public void Lose() { EndGame("失败"); }
+    public void Lose() { EndGame("失败", new Color(1f, 0.4f, 0.3f)); }
 
-    void EndGame(string msg)
+    void EndGame(string msg,Color color)
     {
         gameOver = true;
         resultPanel.SetActive(true);
-        resultText.text = msg;
-
+        resultText.text = msg + "\n金币" + coins + "/" + totalCoins;
+        resultText.color = color;
         Time.timeScale = 0f;                        // 暂停
         Cursor.lockState = CursorLockMode.None;     // 放开鼠标点按钮
     }

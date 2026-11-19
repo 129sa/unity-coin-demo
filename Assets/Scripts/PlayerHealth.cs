@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
         hp -= amount;
         Debug.Log(" ‹…À£° £”‡—™¡ø£∫" + hp);
-
+        GameUI.Instance.playHit();
         if (hp <= 0)
         {
             Die();
